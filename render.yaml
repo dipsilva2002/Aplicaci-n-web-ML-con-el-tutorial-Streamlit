@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: streamlit-ml-app
+    env: python
+    buildCommand: pip install -r requirements.txt && python -m src.train
+    startCommand: streamlit run src/app.py --server.port $PORT --server.address 0.0.0.0
+    plan: free
+    envVars:
+      - key: SEED
+        value: "42"
+      - key: MODEL_PATH
+        value: "models/iris_clf.joblib"
